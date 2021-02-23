@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import useProfiles from "../../hooks/useProfiles";
 
 const Body = styled.div`
   width: 660px;
@@ -135,8 +134,6 @@ const DescriptionText = styled.h6`
 `;
 
 export default function ProfileCard(props) {
-  const profiles = useProfiles();
-
   return (
     <Body>
       <Container>
@@ -146,7 +143,7 @@ export default function ProfileCard(props) {
             <NameText>{props.name} </NameText>
             <PositionText>{props.occupation} </PositionText>
             <LocationText>
-              {props.city}, {props.state}
+              {props.city} {props.state ? "," : ""} {props.state ?? ""}
             </LocationText>
             <DescriptionText>{props.bio}</DescriptionText>
           </Column>
@@ -155,13 +152,14 @@ export default function ProfileCard(props) {
           <EditButton type="submit">Edit</EditButton>
           <DeleteButton
             type="submit"
-            onClick={() =>
-              profiles.deleteProfileById(
-                props.index,
-                props.profiles,
-                props.setProfiles
-              )
-            }
+            // onClick={() =>
+            //   profiles.deleteProfileById(
+            //     props.index,
+            //     props.profiles,
+            //     props.setProfiles
+            //   )
+            // }
+            onClick={() => props.deleteProfile(props.index)}
           >
             Delete
           </DeleteButton>

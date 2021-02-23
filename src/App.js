@@ -5,6 +5,7 @@ import Main from "./components/layout/Main";
 import useProfiles from "./hooks/useProfiles";
 import Modal from "react-modal";
 import NewProfileModal from "./components/modals/NewProfileModal";
+import DeleteProfileModal from "./components/modals/DeleteProfileModal";
 
 const StyledApp = styled.div`
   display: flex;
@@ -35,6 +36,23 @@ const AddModal = styled(Modal)`
   border-color: "none";
 `;
 
+const DeleteModal = styled(Modal)`
+  /* position: absolute; */
+  /* display: flex; */
+  width: 543px;
+  /* height: 472px; */
+  margin: auto;
+  /* height: 100%; */
+  /* text-align: center; */
+  /* align-content: center; */
+  /*margin: 76px 415px 170px 144px;
+  padding: 25px 25px 32px 100px; */
+  border-radius: 30px;
+  /* box-shadow: 0 16px 29px 0 rgba(0, 0, 0, 0.3); */
+  background-color: #f8f8f8;
+  border-color: "none";
+`;
+
 export default function App() {
   React.useEffect(() => {
     profiles.initializeProfiles(setProfilesList);
@@ -43,14 +61,25 @@ export default function App() {
 
   const profiles = useProfiles();
   const [profilesList, setProfilesList] = useState([]);
-  const [addModalIsOpen, setaddModalIsOpen] = useState(false);
+  const [addModalIsOpen, setAddModalIsOpen] = useState(false);
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
+  const [profileToDelete, setProfileToDelete] = useState([]);
 
   const openAddModal = () => {
-    setaddModalIsOpen(true);
+    setAddModalIsOpen(true);
   };
 
   const closeAddModal = () => {
-    setaddModalIsOpen(false);
+    setAddModalIsOpen(false);
+  };
+
+  const openDeleteModal = (index) => {
+    setProfileToDelete(index);
+    setDeleteModalIsOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteModalIsOpen(false);
   };
 
   // const customStyles = {
@@ -81,6 +110,7 @@ export default function App() {
           profiles={profilesList}
           setProfiles={setProfilesList}
           addProfile={openAddModal}
+          deleteProfile={openDeleteModal}
         />
       </Row>
       <AddModal
@@ -94,6 +124,18 @@ export default function App() {
           closeAddModal={closeAddModal}
         />
       </AddModal>
+      <DeleteModal
+        isOpen={deleteModalIsOpen}
+        // style={customStyles}
+        contentLabel="Delete Profile Modal"
+      >
+        <DeleteProfileModal
+          profiles={profilesList}
+          setProfiles={setProfilesList}
+          closeDeleteModal={closeDeleteModal}
+          profileToDelete={profileToDelete}
+        />
+      </DeleteModal>
     </StyledApp>
   );
 }

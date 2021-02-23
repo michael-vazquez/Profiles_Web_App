@@ -118,7 +118,7 @@ export default function NewProfileModal(props) {
   const profiles = useProfiles();
 
   const [profile, setProfile] = useState({
-    url: "",
+    picUrl: "",
     name: "",
     occupation: "",
     city: "",
@@ -145,7 +145,7 @@ export default function NewProfileModal(props) {
       </RowRight>
       <Title>Add New Profile</Title>
       <Content>
-        <Image src={profile.url ?? "/"} />
+        <Image src={profile.picUrl ?? "/"} />
         <Container>
           <TextField
             type="text"
@@ -153,7 +153,7 @@ export default function NewProfileModal(props) {
             name="pictureUrl"
             placeholder="Picture URL"
             value={profile.url}
-            onChange={handleProfileChange("url")}
+            onChange={handleProfileChange("picUrl")}
           />
           <TextField
             type="text"
