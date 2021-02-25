@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Logo from "../../../public/assets/logo.png";
 
 const Bar = styled.div`
   width: 100%;
@@ -17,7 +18,7 @@ const Image = styled.img`
 export default function Header() {
   return (
     <Bar>
-      <Image src="assets/logo.png" alt="logo" />
+      <Image src={Logo} alt="logo" />
     </Bar>
   );
 }

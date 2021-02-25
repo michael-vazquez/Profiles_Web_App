@@ -21,8 +21,17 @@ export const useProfiles = () => {
   };
 
   const saveProfile = async (profile, profilesList, setProfilesList) => {
-    console.log(profile);
     setProfilesList([...profilesList, profile]);
+  };
+
+  const updateProfile = async (
+    profile,
+    index,
+    profilesList,
+    setProfilesList
+  ) => {
+    profilesList[index - 1] = profile;
+    setProfilesList(profilesList);
   };
 
   // const initializeProfiles = () => {
@@ -116,7 +125,7 @@ export const useProfiles = () => {
   //   ];
   // };
 
-  return { initializeProfiles, deleteProfileById, saveProfile };
+  return { initializeProfiles, deleteProfileById, saveProfile, updateProfile };
 };
 
 export default useProfiles;

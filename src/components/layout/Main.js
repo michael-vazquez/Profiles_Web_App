@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import ProfileCard from "../profile/ProfileCard";
+import AddIcon from "../../../public/assets/add-icon.png";
 
 const Body = styled.div`
   width: 100%;
@@ -77,7 +78,7 @@ export default function Main(props) {
           <Title> User Profiles ({props.profiles.length}) </Title>
           <Button type="submit" onClick={props.addProfile}>
             <Row>
-              <Image src="assets/add-icon.png" alt="add" />
+              <Image src={AddIcon} alt="add" onClick={props.addProfile} />
               <Text>Add New Profile </Text>
             </Row>
           </Button>

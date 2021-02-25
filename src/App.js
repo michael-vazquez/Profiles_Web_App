@@ -64,6 +64,7 @@ export default function App() {
   const [addModalIsOpen, setAddModalIsOpen] = useState(false);
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
   const [profileToDelete, setProfileToDelete] = useState([]);
+  const [profileToEdit, setProfileToEdit] = useState([]);
 
   const openAddModal = () => {
     setAddModalIsOpen(true);
@@ -71,6 +72,7 @@ export default function App() {
 
   const closeAddModal = () => {
     setAddModalIsOpen(false);
+    setProfileToEdit([]);
   };
 
   const openDeleteModal = (index) => {
@@ -80,6 +82,11 @@ export default function App() {
 
   const closeDeleteModal = () => {
     setDeleteModalIsOpen(false);
+  };
+
+  const openEditProfile = (index) => {
+    setProfileToEdit(index + 1);
+    setAddModalIsOpen(true);
   };
 
   // const customStyles = {
@@ -111,6 +118,7 @@ export default function App() {
           setProfiles={setProfilesList}
           addProfile={openAddModal}
           deleteProfile={openDeleteModal}
+          editProfile={openEditProfile}
         />
       </Row>
       <AddModal
@@ -122,6 +130,7 @@ export default function App() {
           profiles={profilesList}
           setProfiles={setProfilesList}
           closeAddModal={closeAddModal}
+          edit={profileToEdit}
         />
       </AddModal>
       <DeleteModal

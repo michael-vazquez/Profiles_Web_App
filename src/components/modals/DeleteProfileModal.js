@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import useProfiles from "../../hooks/useProfiles";
+import CloseIcon from "../../../public/assets/close-icon-modal.png";
 
 const Container = styled.div`
   display: flex;
@@ -117,7 +118,7 @@ export default function NewProfileModal(props) {
     <Container>
       <RowRight>
         <CloseImage
-          src="assets/add-icon.png"
+          src={CloseIcon}
           alt="close"
           onClick={props.closeDeleteModal}
         />

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import useProfiles from "../../hooks/useProfiles";
+import CloseIcon from "../../../public/assets/close-icon-modal.png";
 
 const Container = styled.div`
   display: flex;
@@ -117,31 +118,44 @@ const TextArea = styled.textarea`
 export default function NewProfileModal(props) {
   const profiles = useProfiles();
 
-  const [profile, setProfile] = useState({
-    picUrl: "",
-    name: "",
-    occupation: "",
-    city: "",
-    bio: ""
-  });
+  const [profile, setProfile] = props.edit
+    ? useState({
+        picUrl: props.profiles[props.edit - 1]?.picUrl,
+        name: props.profiles[props.edit - 1]?.name,
+        occupation: props.profiles[props.edit - 1]?.occupation,
+        city: props.profiles[props.edit - 1]?.city,
+        bio: props.profiles[props.edit - 1]?.bio
+      })
+    : useState({
+        picUrl: "",
+        name: "",
+        occupation: "",
+        city: "",
+        bio: ""
+      });
 
   const handleProfileChange = (prop) => (event) => {
     setProfile({ ...profile, [prop]: event.target.value });
   };
 
   const handleSaveProfile = () => {
-    profiles.saveProfile(profile, props.profiles, props.setProfiles);
     props.closeAddModal();
+    if (props.edit) {
+      profiles.updateProfile(
+        profile,
+        props.edit,
+        props.profiles,
+        props.setProfiles
+      );
+    } else {
+      profiles.saveProfile(profile, props.profiles, props.setProfiles);
+    }
   };
 
   return (
     <Container>
       <RowRight>
-        <CloseImage
-          src="assets/add-icon.png"
-          alt="close"
-          onClick={props.closeAddModal}
-        />
+        <CloseImage src={CloseIcon} alt="close" onClick={props.closeAddModal} />
       </RowRight>
       <Title>Add New Profile</Title>
       <Content>
@@ -152,7 +166,7 @@ export default function NewProfileModal(props) {
             id="pictureUrl"
             name="pictureUrl"
             placeholder="Picture URL"
-            value={profile.url}
+            value={profile.picUrl}
             onChange={handleProfileChange("picUrl")}
           />
           <TextField

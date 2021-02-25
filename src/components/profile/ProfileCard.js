@@ -149,16 +149,14 @@ export default function ProfileCard(props) {
           </Column>
         </Row>
         <RowRight>
-          <EditButton type="submit">Edit</EditButton>
+          <EditButton
+            type="submit"
+            onClick={() => props.editProfile(props.index)}
+          >
+            Edit
+          </EditButton>
           <DeleteButton
             type="submit"
-            // onClick={() =>
-            //   profiles.deleteProfileById(
-            //     props.index,
-            //     props.profiles,
-            //     props.setProfiles
-            //   )
-            // }
             onClick={() => props.deleteProfile(props.index)}
           >
             Delete
