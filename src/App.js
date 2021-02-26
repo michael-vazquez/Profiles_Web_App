@@ -19,38 +19,15 @@ const Row = styled.div`
   flex-direction: row;
 `;
 
-const AddModal = styled(Modal)`
-  /* position: absolute; */
-  /* display: flex; */
+const StyledModal = styled(Modal)`
   width: 543px;
-  /* height: 472px; */
   margin: auto;
-  /* height: 100%; */
-  /* text-align: center; */
-  /* align-content: center; */
-  /*margin: 76px 415px 170px 144px;
-  padding: 25px 25px 32px 100px; */
   border-radius: 30px;
-  /* box-shadow: 0 16px 29px 0 rgba(0, 0, 0, 0.3); */
   background-color: #f8f8f8;
-  border-color: "none";
-`;
-
-const DeleteModal = styled(Modal)`
-  /* position: absolute; */
-  /* display: flex; */
-  width: 543px;
-  /* height: 472px; */
-  margin: auto;
-  /* height: 100%; */
-  /* text-align: center; */
-  /* align-content: center; */
-  /*margin: 76px 415px 170px 144px;
-  padding: 25px 25px 32px 100px; */
-  border-radius: 30px;
-  /* box-shadow: 0 16px 29px 0 rgba(0, 0, 0, 0.3); */
-  background-color: #f8f8f8;
-  border-color: "none";
+  :focus {
+    outline: 0;
+  }
+  margin-top: 10%;
 `;
 
 export default function App() {
@@ -109,22 +86,23 @@ export default function App() {
 
   return (
     <StyledApp>
-      <Row>
-        <Header />
-      </Row>
-      <Row>
-        <Main
-          profiles={profilesList}
-          setProfiles={setProfilesList}
-          addProfile={openAddModal}
-          deleteProfile={openDeleteModal}
-          editProfile={openEditProfile}
-        />
-      </Row>
-      <AddModal
+      {/* <Row> */}
+      <Header />
+      {/* </Row> */}
+      {/* <Row> */}
+      <Main
+        profiles={profilesList}
+        setProfiles={setProfilesList}
+        addProfile={openAddModal}
+        deleteProfile={openDeleteModal}
+        editProfile={openEditProfile}
+      />
+      {/* </Row> */}
+      <StyledModal
         isOpen={addModalIsOpen}
         // style={customStyles}
         contentLabel="Add New Profile Modal"
+        ariaHideApp={false}
       >
         <NewProfileModal
           profiles={profilesList}
@@ -132,11 +110,12 @@ export default function App() {
           closeAddModal={closeAddModal}
           edit={profileToEdit}
         />
-      </AddModal>
-      <DeleteModal
+      </StyledModal>
+      <StyledModal
         isOpen={deleteModalIsOpen}
         // style={customStyles}
         contentLabel="Delete Profile Modal"
+        ariaHideApp={false}
       >
         <DeleteProfileModal
           profiles={profilesList}
@@ -144,7 +123,7 @@ export default function App() {
           closeDeleteModal={closeDeleteModal}
           profileToDelete={profileToDelete}
         />
-      </DeleteModal>
+      </StyledModal>
     </StyledApp>
   );
 }
