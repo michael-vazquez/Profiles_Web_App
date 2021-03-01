@@ -10,8 +10,9 @@ import DeleteProfileModal from "./components/modals/DeleteProfileModal";
 const StyledApp = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0px;
+  margin: 0px 0px 0px 0px;
   padding: 0px;
+  width: 100%;
 `;
 
 const Row = styled.div`
